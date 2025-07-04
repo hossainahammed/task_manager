@@ -36,13 +36,27 @@ class _SignInScreenState extends State<SignInScreen> {
                   TextFormField(
                     controller: _emailTEController,
                     textInputAction: TextInputAction.next,
+                    autovalidateMode: AutovalidateMode.always,
                     decoration: InputDecoration(hintText: 'Email'),
+                    validator: (String?value){
+                      if(value?.isEmpty ?? true){
+                        return 'Enter a valid email';
+                      }
+                      return null;
+                    },
                   ),
                   SizedBox(height: 8),
                   TextFormField(
                     controller: _passwordTEController,
                     obscureText: true,
                     decoration: InputDecoration(hintText: 'Password'),
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (String?value){
+                      if(value?.isEmpty ?? true){
+                        return 'Enter a valid Password';
+                      }
+                      return null;
+                    },
                   ),
                   SizedBox(height: 16),
                   ElevatedButton(
@@ -92,7 +106,11 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
-  void _onTapSigninButton() {}
+  void _onTapSigninButton() {
+    if(_formkey.currentState!.validate()){
+      //TODO:Sign in with Api
+    }
+  }
   void _onTapForgotPasswordButton() {}
   void _onTapSignUpButton() {}
 }
