@@ -34,6 +34,18 @@ class TaskManagerApp extends StatelessWidget {
                 borderSide: BorderSide.none
             ),
 
+        ),
+        elevatedButtonTheme:ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+              fixedSize: Size.fromWidth(double.maxFinite),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(4),
+              ),
+              padding: EdgeInsets.symmetric(vertical: 12),
+              backgroundColor: Colors.green,
+              foregroundColor: Colors.white
+
+          ),
         )
       ),
 

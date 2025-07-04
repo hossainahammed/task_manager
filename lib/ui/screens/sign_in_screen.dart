@@ -24,19 +24,22 @@ class _SignInScreenState extends State<SignInScreen> {
               Text('Get Started With',style: Theme.of(context).textTheme.titleLarge,),
               SizedBox(height: 24,),
               TextFormField(
+                textInputAction: TextInputAction.next,
                 decoration:InputDecoration(
                   hintText: 'Email',
                 ) ,
               ),
               SizedBox(height: 8,),
               TextFormField(
+                obscureText: true,
                 decoration:InputDecoration(
                   hintText: 'Password',
 
                 ) ,
               ),
-              SizedBox(height: 8,),
+              SizedBox(height: 16,),
               ElevatedButton(
+
                 onPressed: () {},
                 child: Icon(Icons.arrow_circle_right_outlined),
               ),
