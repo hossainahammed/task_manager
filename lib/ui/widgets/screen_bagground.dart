@@ -12,12 +12,14 @@ class ScreenBagground extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        SvgPicture.asset(AssetPaths.backgroundSvg,fit: BoxFit.cover,height: double.maxFinite,width: double.maxFinite,),
-        child,
-
+        SvgPicture.asset(
+          AssetPaths.backgroundSvg,
+          fit: BoxFit.cover,
+          height: double.maxFinite,
+          width: double.maxFinite,
+        ),
+        SafeArea(child: child),
       ],
-
-
     );
   }
 }

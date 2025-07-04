@@ -7,8 +7,38 @@ class TaskManagerApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme:ThemeData(
+        textTheme: TextTheme(
+        titleLarge: TextStyle(fontSize: 28, fontWeight: FontWeight.w700),
+      ),
+        inputDecorationTheme: InputDecorationTheme(
+
+            fillColor: Colors.white,
+            filled: true,
+            contentPadding: EdgeInsets.symmetric(
+                horizontal: 16,vertical: 12
+            ),
+            hintStyle: TextStyle(
+                color: Colors.grey
+            ),
+            border: OutlineInputBorder(
+                borderSide: BorderSide.none
+            ),
+            enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide.none
+            ),
+            focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide.none
+            ),
+            errorBorder: OutlineInputBorder(
+                borderSide: BorderSide.none
+            ),
+
+        )
+      ),
+
+
       home: SplashScreen(),
     );
   }
 }
-
