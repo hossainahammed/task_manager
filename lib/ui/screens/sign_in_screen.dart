@@ -41,8 +41,9 @@ class _SignInScreenState extends State<SignInScreen> {
                 onPressed: _onTapSigninButton,
                 child: Icon(Icons.arrow_circle_right_outlined),
               ),
-       Center(
-         child: Column(
+              SizedBox(height: 32),
+              Center(
+                child: Column(
                   children: [
                     TextButton(
                       onPressed: _onTapForgotPasswordButton,
@@ -71,9 +72,6 @@ class _SignInScreenState extends State<SignInScreen> {
                         ],
                       ),
                     ),
-                  ],
-                ),
-       )         ),
                   ],
                 ),
               ),
