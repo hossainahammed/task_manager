@@ -12,6 +12,9 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
+  final TextEditingController _emailTEController = TextEditingController();
+  final TextEditingController _passwordTEController = TextEditingController();
+  final GlobalKey<FormState> _formkey =GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,64 +22,69 @@ class _SignInScreenState extends State<SignInScreen> {
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 80),
-                Text(
-                  'Get Started With',
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-                SizedBox(height: 24),
-                TextFormField(
-                  textInputAction: TextInputAction.next,
-                  decoration: InputDecoration(hintText: 'Email'),
-                ),
-                SizedBox(height: 8),
-                TextFormField(
-                  obscureText: true,
-                  decoration: InputDecoration(hintText: 'Password'),
-                ),
-                SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: _onTapSigninButton,
-                  child: Icon(Icons.arrow_circle_right_outlined),
-                ),
-                SizedBox(height: 32),
-                Center(
-                  child: Column(
-                    children: [
-                      TextButton(
-                        onPressed: _onTapForgotPasswordButton,
-                        child: Text(
-                          'Forget password ?',
-                          style: TextStyle(color: Colors.grey),
-                        ),
-                      ),
-                      RichText(
-                        text: TextSpan(
-                          text: "Don't have any account ?",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            letterSpacing: 0.4,
-                          ),
-                          children: [
-                            TextSpan(
-                              text: 'Sign Up',
-                              style: TextStyle(
-                                color: Colors.green,
-                                fontWeight: FontWeight.w700,
-                              ),
-                              recognizer:
-                                  TapGestureRecognizer()..onTap = _onTapSignUpButton,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+            child: Form(
+              key: _formkey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 80),
+                  Text(
+                    'Get Started With',
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
-                ),
-              ],
+                  SizedBox(height: 24),
+                  TextFormField(
+                    controller: _emailTEController,
+                    textInputAction: TextInputAction.next,
+                    decoration: InputDecoration(hintText: 'Email'),
+                  ),
+                  SizedBox(height: 8),
+                  TextFormField(
+                    controller: _passwordTEController,
+                    obscureText: true,
+                    decoration: InputDecoration(hintText: 'Password'),
+                  ),
+                  SizedBox(height: 16),
+                  ElevatedButton(
+                    onPressed: _onTapSigninButton,
+                    child: Icon(Icons.arrow_circle_right_outlined),
+                  ),
+                  SizedBox(height: 32),
+                  Center(
+                    child: Column(
+                      children: [
+                        TextButton(
+                          onPressed: _onTapForgotPasswordButton,
+                          child: Text(
+                            'Forget password ?',
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                        ),
+                        RichText(
+                          text: TextSpan(
+                            text: "Don't have any account ?",
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: 0.4,
+                            ),
+                            children: [
+                              TextSpan(
+                                text: 'Sign Up',
+                                style: TextStyle(
+                                  color: Colors.green,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                                recognizer:
+                                    TapGestureRecognizer()..onTap = _onTapSignUpButton,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
