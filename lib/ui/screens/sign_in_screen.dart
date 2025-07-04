@@ -24,6 +24,7 @@ class _SignInScreenState extends State<SignInScreen> {
             padding: const EdgeInsets.all(16),
             child: Form(
               key: _formkey,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -36,7 +37,6 @@ class _SignInScreenState extends State<SignInScreen> {
                   TextFormField(
                     controller: _emailTEController,
                     textInputAction: TextInputAction.next,
-                    autovalidateMode: AutovalidateMode.always,
                     decoration: InputDecoration(hintText: 'Email'),
                     validator: (String?value){
                       if(value?.isEmpty ?? true){
@@ -50,7 +50,6 @@ class _SignInScreenState extends State<SignInScreen> {
                     controller: _passwordTEController,
                     obscureText: true,
                     decoration: InputDecoration(hintText: 'Password'),
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     validator: (String?value){
                       if(value?.isEmpty ?? true){
                         return 'Enter a valid Password';
