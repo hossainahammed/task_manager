@@ -8,6 +8,7 @@ class TaskManagerApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme:ThemeData(
+        colorSchemeSeed: Colors.green,
         textTheme: TextTheme(
         titleLarge: TextStyle(fontSize: 28, fontWeight: FontWeight.w700),
       ),
@@ -46,6 +47,12 @@ class TaskManagerApp extends StatelessWidget {
               foregroundColor: Colors.white
 
           ),
+        ),
+        textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(
+            foregroundColor: Colors.green
+
+          )
         )
       ),
 
