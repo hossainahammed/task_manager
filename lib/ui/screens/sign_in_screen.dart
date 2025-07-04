@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:task_manager/ui/widgets/screen_bagground.dart';
-
 import '../utils/asset_paths.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -14,13 +13,13 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
-    return ScreenBagground(
-      child: Scaffold(
-        body: Column(
-          
-        )
-      
-      ),
+    return Scaffold(
+      body: ScreenBagground(
+        child: Column(
+
+        ),
+      )
+
     );
   }
 }
