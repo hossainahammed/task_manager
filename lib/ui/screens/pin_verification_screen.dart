@@ -1,22 +1,23 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:task_manager/ui/screens/pin_verification_screen.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:task_manager/ui/screens/sign_in_screen.dart';
 import 'package:task_manager/ui/widgets/screen_bagground.dart';
 import '../utils/asset_paths.dart';
 import 'Sign-Up-Screen.dart';
 
-class ForgotPaswordEmailScreen extends StatefulWidget {
-  const ForgotPaswordEmailScreen({super.key});
-  static const String name = '/forgot-password-email';
+class PinVerificationScreen extends StatefulWidget {
+  const PinVerificationScreen({super.key});
+  static const String name = '/pin-verification';
 
   @override
-  State<ForgotPaswordEmailScreen> createState() =>
-      _ForgotPaswordEmailScreenState();
+  State<PinVerificationScreen> createState() =>
+      _PinVerificationScreenState();
 }
 
-class _ForgotPaswordEmailScreenState extends State<ForgotPaswordEmailScreen> {
-  final TextEditingController _emailTEController = TextEditingController();
+class _PinVerificationScreenState extends State<PinVerificationScreen> {
+  final TextEditingController _otpTEController = TextEditingController();
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -34,35 +35,52 @@ class _ForgotPaswordEmailScreenState extends State<ForgotPaswordEmailScreen> {
                   SizedBox(height: 80),
                   Center(
                     child: Text(
-                      'Your Email Address',
+                      'Pin Verification',
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                   ),
                   SizedBox(height: 16),
 
                   Text(
-                    'A six digit OTP will send to your email adress',
+                    'A six digit OTP has been send to your email address',
                     style: Theme.of(
                       context,
                     ).textTheme.titleSmall?.copyWith(color: Colors.grey),
                   ),
                   SizedBox(height: 24),
-                  TextFormField(
-                    controller: _emailTEController,
-                    textInputAction: TextInputAction.next,
-                    decoration: InputDecoration(hintText: 'Email'),
-                    validator: (String? value) {
-                      if (value?.isEmpty ?? true) {
-                        return 'Enter a valid email';
-                      }
-                      return null;
-                    },
+                  PinCodeTextField(
+                    length: 6,
+                    obscureText: false,
+                    animationType: AnimationType.fade,
+                    keyboardType: TextInputType.number,
+                    pinTheme: PinTheme(
+                      shape: PinCodeFieldShape.box,
+                      borderRadius: BorderRadius.circular(5),
+                      fieldHeight: 50,
+                      fieldWidth: 40,
+                      activeFillColor: Colors.white,
+                      selectedColor: Colors.green,
+                      inactiveColor: Colors.grey,
+
+                    ),
+                    animationDuration: Duration(milliseconds: 300),
+                    backgroundColor: Colors.transparent,
+
+                    controller: _otpTEController,
+
+
+                    beforeTextPaste: (text) {
+                      print("Allowing to paste $text");
+                      //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
+                      //but you can show anything you want here, like your pop up saying wrong paste format or etc
+                      return true;
+                    },appContext: context,
                   ),
 
                   SizedBox(height: 16),
                   ElevatedButton(
-                    onPressed: _onTapSubmitButton,
-                    child: Icon(Icons.arrow_circle_right_outlined),
+                    onPressed: _onTapSignInButton,
+                    child: Text('Verify'),
                   ),
                   SizedBox(height: 32),
                   Center(
@@ -81,8 +99,8 @@ class _ForgotPaswordEmailScreenState extends State<ForgotPaswordEmailScreen> {
                               fontWeight: FontWeight.w700,
                             ),
                             recognizer:
-                                TapGestureRecognizer()
-                                  ..onTap = _onTapSignInButton,
+                            TapGestureRecognizer()
+                              ..onTap = _onTapSignInButton,
                           ),
                         ],
                       ),
@@ -98,16 +116,17 @@ class _ForgotPaswordEmailScreenState extends State<ForgotPaswordEmailScreen> {
   }
 
   void _onTapSubmitButton() {
-   Navigator.pushNamed(context, PinVerificationScreen.name);
+    // if (_formkey.currentState!.validate()) {
+    //   //TODO:Sign in with Api
+    // }
   }
 
   void _onTapSignInButton() {
-    Navigator.pop(context);
+    Navigator.pushNamedAndRemoveUntil(context, SignInScreen.name, (predicate)=>false);
   }
 
-  @override
   void dispose() {
-    _emailTEController.dispose();
+    _otpTEController.dispose();
     super.dispose();
   }
 }
