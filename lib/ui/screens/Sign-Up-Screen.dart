@@ -3,17 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:task_manager/ui/widgets/screen_bagground.dart';
 import '../utils/asset_paths.dart';
-import 'Sign-Up-Screen.dart';
 
-class SignInScreen extends StatefulWidget {
-  const SignInScreen({super.key});
-  static const String name='/sign-in';
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
+  static const String name='/sign-up';
 
   @override
-  State<SignInScreen> createState() => _SignInScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _SignInScreenState extends State<SignInScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _emailTEController = TextEditingController();
   final TextEditingController _passwordTEController = TextEditingController();
   final GlobalKey<FormState> _formkey =GlobalKey<FormState>();
@@ -32,7 +31,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 children: [
                   SizedBox(height: 80),
                   Text(
-                    'Get Started With',
+                    'Join With Us',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   SizedBox(height: 24),
@@ -90,7 +89,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                   fontWeight: FontWeight.w700,
                                 ),
                                 recognizer:
-                                    TapGestureRecognizer()..onTap = _onTapSignUpButton,
+                                TapGestureRecognizer()..onTap = _onTapSignUpButton,
                               ),
                             ],
                           ),
@@ -114,7 +113,7 @@ class _SignInScreenState extends State<SignInScreen> {
   }
   void _onTapForgotPasswordButton() {}
   void _onTapSignUpButton() {
-    Navigator.pushNamed(context, SignUpScreen.name);
+
   }
 
   void dispose(){
