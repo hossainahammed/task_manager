@@ -33,9 +33,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 80),
-                  Text(
-                    'Join With Us',
-                    style: Theme.of(context).textTheme.titleLarge,
+                  Center(
+                    child: Text(
+                      'Join With Us',
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
                   ),
                   SizedBox(height: 24),
                   TextFormField(

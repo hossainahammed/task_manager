@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:task_manager/ui/screens/forgot_passaword_email_screen.dart';
 import 'package:task_manager/ui/widgets/screen_bagground.dart';
 import '../utils/asset_paths.dart';
 import 'Sign-Up-Screen.dart';
@@ -31,9 +32,11 @@ class _SignInScreenState extends State<SignInScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 80),
-                  Text(
-                    'Get Started With',
-                    style: Theme.of(context).textTheme.titleLarge,
+                  Center(
+                    child: Text(
+                      'Get Started With',
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
                   ),
                   SizedBox(height: 24),
                   TextFormField(
@@ -61,7 +64,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                   SizedBox(height: 16),
                   ElevatedButton(
-                    onPressed: _onTapSigninButton,
+                    onPressed: _onTapSignInButton,
                     child: Icon(Icons.arrow_circle_right_outlined),
                   ),
                   SizedBox(height: 32),
@@ -107,12 +110,14 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
-  void _onTapSigninButton() {
+  void _onTapSignInButton() {
     if(_formkey.currentState!.validate()){
       //TODO:Sign in with Api
     }
   }
-  void _onTapForgotPasswordButton() {}
+  void _onTapForgotPasswordButton() {
+    Navigator.pushNamed(context, ForgotPaswordEmailScreen.name);
+  }
   void _onTapSignUpButton() {
     Navigator.pushNamed(context, SignUpScreen.name);
   }
