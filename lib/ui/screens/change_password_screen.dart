@@ -2,24 +2,27 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:task_manager/ui/screens/change_password_screen.dart';
 import 'package:task_manager/ui/screens/sign_in_screen.dart';
 import 'package:task_manager/ui/widgets/screen_bagground.dart';
 import '../utils/asset_paths.dart';
 import 'Sign-Up-Screen.dart';
 
-class PinVerificationScreen extends StatefulWidget {
-  const PinVerificationScreen({super.key});
-  static const String name = '/pin-verification';
+class changePasswordScreen extends StatefulWidget {
+  const changePasswordScreen({super.key});
+  static const String name = '/change-password';
 
   @override
-  State<PinVerificationScreen> createState() =>
-      _PinVerificationScreenState();
+  State<changePasswordScreen> createState() =>
+      _changePasswordScreenState();
 }
 
-class _PinVerificationScreenState extends State<PinVerificationScreen> {
-  final TextEditingController _otpTEController = TextEditingController();
+class _changePasswordScreenState extends State<changePasswordScreen> {
+  final TextEditingController _passwordTEController = TextEditingController();
+  final TextEditingController _confirmpasswordTEController = TextEditingController();
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+  bool _obscurePassword = true;
+  bool _obscureConfirmPassword = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,52 +39,75 @@ class _PinVerificationScreenState extends State<PinVerificationScreen> {
                   SizedBox(height: 80),
                   Center(
                     child: Text(
-                      'Pin Verification',
+                      'Set Password',
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                   ),
                   SizedBox(height: 16),
 
                   Text(
-                    'A six digit OTP has been send to your email address',
+                    'Password should be more than 6 letters.',
                     style: Theme.of(
                       context,
                     ).textTheme.titleSmall?.copyWith(color: Colors.grey),
                   ),
                   SizedBox(height: 24),
-                  PinCodeTextField(
-                    length: 6,
-                    obscureText: false,
-                    animationType: AnimationType.fade,
-                    keyboardType: TextInputType.number,
-                    pinTheme: PinTheme(
-                      shape: PinCodeFieldShape.box,
-                      borderRadius: BorderRadius.circular(5),
-                      fieldHeight: 50,
-                      fieldWidth: 40,
-                      activeFillColor: Colors.white,
-                      selectedColor: Colors.green,
-                      inactiveColor: Colors.grey,
+                  TextFormField(
+                    controller: _passwordTEController,
+                    obscureText: _obscurePassword,
+                    decoration: InputDecoration(
+                        hintText: 'Password',
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _obscurePassword ? Icons.visibility_off : Icons.visibility,
+                          color: Colors.grey,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _obscurePassword = !_obscurePassword;
+                          });
+                        },
+                      ),
 
                     ),
-                    animationDuration: Duration(milliseconds: 300),
-                    backgroundColor: Colors.transparent,
-
-                    controller: _otpTEController,
-
-
-                    beforeTextPaste: (text) {
-                      print("Allowing to paste $text");
-                      //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
-                      //but you can show anything you want here, like your pop up saying wrong paste format or etc
-                      return true;
-                    },appContext: context,
+                    validator: (String?value){
+                      if(value?.isEmpty ?? true){
+                        return 'Enter a valid Password';
+                      }
+                      return null;
+                    },
                   ),
+                  SizedBox(height: 13),
+                  TextFormField(
+                    controller: _confirmpasswordTEController,
+                    obscureText: _obscureConfirmPassword,
+                    decoration: InputDecoration(
+                      hintText: 'Confirm Password',
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _obscureConfirmPassword ? Icons.visibility_off : Icons.visibility,
+                          color: Colors.grey,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _obscureConfirmPassword = !_obscureConfirmPassword;
+                          });
+                        },
+                      ),
+                    ),
+                    validator: (String? value) {
+                      if ((value ?? '') != _passwordTEController.text) {
+                        return "Confirm Password doesn't match";
+                      }
+                      return null;
+                    },
+                  ),
+
 
                   SizedBox(height: 16),
                   ElevatedButton(
-                    onPressed: _onTapSubmitButton,
-                    child: Text('Verify'),
+                    onPressed: _onTapSignInButton,
+                    child: Text('Confirm'),
                   ),
                   SizedBox(height: 32),
                   Center(
@@ -120,16 +146,15 @@ class _PinVerificationScreenState extends State<PinVerificationScreen> {
     // if (_formkey.currentState!.validate()) {
     //   //TODO:Sign in with Api
     // }
-    Navigator.pushNamed(context, changePasswordScreen.name);
   }
 
   void _onTapSignInButton() {
     Navigator.pushNamedAndRemoveUntil(context, SignInScreen.name, (predicate)=>false);
   }
 
-  @override
   void dispose() {
-    _otpTEController.dispose();
+    _passwordTEController.dispose();
+    _confirmpasswordTEController.dispose();
     super.dispose();
   }
 }

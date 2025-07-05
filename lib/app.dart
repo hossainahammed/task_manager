@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:task_manager/ui/screens/Sign-Up-Screen.dart';
+import 'package:task_manager/ui/screens/change_password_screen.dart';
 import 'package:task_manager/ui/screens/forgot_passaword_email_screen.dart';
 import 'package:task_manager/ui/screens/pin_verification_screen.dart';
 import 'package:task_manager/ui/screens/sign_in_screen.dart';
@@ -68,6 +69,7 @@ class TaskManagerApp extends StatelessWidget {
         SignUpScreen.name:(context)=>SignUpScreen(),
         ForgotPaswordEmailScreen.name:(context)=>ForgotPaswordEmailScreen(),
         PinVerificationScreen.name:(context)=>PinVerificationScreen(),
+        changePasswordScreen.name:(context)=>changePasswordScreen(),
 
 
     },
