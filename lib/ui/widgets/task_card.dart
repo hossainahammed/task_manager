@@ -41,11 +41,12 @@ class TaskCard extends StatelessWidget {
                 Spacer(),
                 IconButton(
                   onPressed: () {},
-                  icon: Icon(Icons.delete),
+                  icon: Icon(Icons.edit,color:Colors.greenAccent,),
+
                 ),
                 IconButton(
                   onPressed: () {},
-                  icon: Icon(Icons.edit),
+                  icon: Icon(Icons.delete,color:Colors.red,),
                 ),
               ],
             ),
