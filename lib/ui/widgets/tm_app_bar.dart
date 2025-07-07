@@ -22,7 +22,7 @@ class _TaskManagerAppBarState extends State<TaskManagerAppBar> {
       title: Row(
         children: [
           CircleAvatar(
-            // radius: 50.0,
+            radius: 20.0,
             backgroundImage:NetworkImage('https://scontent.fdac198-1.fna.fbcdn.net/v/t39.30808-6/480468323_2092966654471743_3439343231728926675_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=a5f93a&_nc_eui2=AeFMUI1Y_brqm7yt7Ubs-OiO2jIFX1frtODaMgVfV-u04GhkY7LHt7hZbwly0eoLFmXxHLoQfvlZN48Whxz6mRqQ&_nc_ohc=55TYNfi1faIQ7kNvwGhDMnV&_nc_oc=AdnrflqU5gR8xclBl3ajBoABqbWKBftbWHqksn2harCcp6_vTEBJ3I1eVMESCxHIKdk&_nc_zt=23&_nc_ht=scontent.fdac198-1.fna&_nc_gid=ciNP6IVWFiqUmxlDUi4y6w&oh=00_AfRXhS-Ko4ajDCXHlanX7vjY9_MfODwJM_TVDmUh5__hhA&oe=6871B4D2'),
           ),
           SizedBox(width: 16),
