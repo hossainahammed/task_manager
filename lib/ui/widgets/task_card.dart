@@ -1,16 +1,9 @@
 import 'package:flutter/material.dart';
 
-enum TaskType{
-  tNew,
-  Progress,
-  Completed,
-  Cancelled,
-}
-class TaskCard extends StatelessWidget {
+enum TaskType { tNew, Progress, Completed, Cancelled }
 
-  const TaskCard({
-    super.key, required this.taskType,
-  });
+class TaskCard extends StatelessWidget {
+  const TaskCard({super.key, required this.taskType});
   final TaskType taskType;
   @override
   Widget build(BuildContext context) {
@@ -18,10 +11,7 @@ class TaskCard extends StatelessWidget {
       elevation: 0,
       color: Colors.white,
       child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 10,
-        ),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -29,16 +19,13 @@ class TaskCard extends StatelessWidget {
               'Title Will be here',
               style: Theme.of(context).textTheme.bodyMedium,
             ),
-            Text(
-              'Description',
-              style: TextStyle(color: Colors.black54),
-            ),
+            Text('Description', style: TextStyle(color: Colors.black54)),
             Text('Date:12/12/12'),
             SizedBox(height: 8),
             Row(
               children: [
                 Chip(
-                  label: Text('New'),
+                  label: Text(_getTaskTypeName(),style: TextStyle(color: Colors.white),),
                   backgroundColor: _getTaskChipColor(),
                   padding: EdgeInsets.symmetric(horizontal: 16),
                   shape: RoundedRectangleBorder(
@@ -49,12 +36,11 @@ class TaskCard extends StatelessWidget {
                 Spacer(),
                 IconButton(
                   onPressed: () {},
-                  icon: Icon(Icons.edit,color:Colors.greenAccent,),
-
+                  icon: Icon(Icons.edit, color: Colors.greenAccent),
                 ),
                 IconButton(
                   onPressed: () {},
-                  icon: Icon(Icons.delete,color:Colors.red,),
+                  icon: Icon(Icons.delete, color: Colors.red),
                 ),
               ],
             ),
@@ -63,7 +49,8 @@ class TaskCard extends StatelessWidget {
       ),
     );
   }
-  Color _getTaskChipColor(){
+
+  Color _getTaskChipColor() {
     // if(taskType==TaskType.tNew){
     //   return Colors.blue;
     // }
@@ -76,8 +63,7 @@ class TaskCard extends StatelessWidget {
     // else {
     //   return Colors.red;
     // }
-    switch(taskType){
-
+    switch (taskType) {
       case TaskType.tNew:
         return Colors.blue;
       case TaskType.Progress:
@@ -87,6 +73,18 @@ class TaskCard extends StatelessWidget {
       case TaskType.Cancelled:
         return Colors.red;
     }
-
+  }
+  String _getTaskTypeName(){
+    switch(taskType){
+      case TaskType.tNew:
+        return 'New';
+        throw UnimplementedError();
+      case TaskType.Progress:
+        return 'Progress';
+      case TaskType.Completed:
+        return 'Completed';
+      case TaskType.Cancelled:
+        return 'Cancelled';
+    }
   }
 }
