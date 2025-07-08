@@ -17,7 +17,9 @@ class _CompleteTaskListScreenState extends State<CompleteTaskListScreen> {
 
         itemCount: 10,
         itemBuilder: (context, index) {
-          return TaskCard();
+          return TaskCard(
+            taskType: TaskType.Completed,
+          );
         },
       ),
     );

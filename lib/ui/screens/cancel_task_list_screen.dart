@@ -17,7 +17,9 @@ class _CancelTaskListScreenState extends State<CancelTaskListScreen> {
 
         itemCount: 10,
         itemBuilder: (context, index) {
-          return TaskCard();
+          return TaskCard(
+            taskType: TaskType.Cancelled,
+          );
         },
       ),
     );

@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 
+enum TaskType{
+  tNew,
+  Progress,
+  Completed,
+  Cancelled,
+}
 class TaskCard extends StatelessWidget {
-  const TaskCard({
-    super.key,
-  });
 
+  const TaskCard({
+    super.key, required this.taskType,
+  });
+  final TaskType taskType;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -32,7 +39,7 @@ class TaskCard extends StatelessWidget {
               children: [
                 Chip(
                   label: Text('New'),
-                  backgroundColor: Colors.green,
+                  backgroundColor: _getTaskChipColor(),
                   padding: EdgeInsets.symmetric(horizontal: 16),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
@@ -54,5 +61,20 @@ class TaskCard extends StatelessWidget {
         ),
       ),
     );
+  }
+  Color _getTaskChipColor(){
+    if(taskType==TaskType.tNew){
+      return Colors.blue;
+    }
+    else if(taskType==TaskType.Progress){
+      return Colors.yellow;
+    }
+    else if(taskType==TaskType.Completed){
+      return Colors.green;
+    }
+    else {
+      return Colors.red;
+    }
+
   }
 }
