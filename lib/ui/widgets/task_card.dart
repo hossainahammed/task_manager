@@ -43,6 +43,7 @@ class TaskCard extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 16),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
+                    side: BorderSide.none,
                   ),
                 ),
                 Spacer(),
@@ -63,17 +64,28 @@ class TaskCard extends StatelessWidget {
     );
   }
   Color _getTaskChipColor(){
-    if(taskType==TaskType.tNew){
-      return Colors.blue;
-    }
-    else if(taskType==TaskType.Progress){
-      return Colors.yellow;
-    }
-    else if(taskType==TaskType.Completed){
-      return Colors.green;
-    }
-    else {
-      return Colors.red;
+    // if(taskType==TaskType.tNew){
+    //   return Colors.blue;
+    // }
+    // else if(taskType==TaskType.Progress){
+    //   return Colors.purple;
+    // }
+    // else if(taskType==TaskType.Completed){
+    //   return Colors.green;
+    // }
+    // else {
+    //   return Colors.red;
+    // }
+    switch(taskType){
+
+      case TaskType.tNew:
+        return Colors.blue;
+      case TaskType.Progress:
+        return Colors.purple;
+      case TaskType.Completed:
+        return Colors.green;
+      case TaskType.Cancelled:
+        return Colors.red;
     }
 
   }
