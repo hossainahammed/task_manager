@@ -27,7 +27,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
       body: ScreenBagground(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(15),
             child: Form(
               key: _formkey,
               autovalidateMode: AutovalidateMode.onUserInteraction,
