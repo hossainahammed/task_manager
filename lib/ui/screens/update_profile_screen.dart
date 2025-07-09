@@ -41,7 +41,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                   ),
-                  SizedBox(height: 24),
+                  SizedBox(height: 25),
 
                   SizedBox(height: 8),
                   TextFormField(
