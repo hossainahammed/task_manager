@@ -34,7 +34,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height:75),
+                  SizedBox(height:80),
                   Center(
                     child: Text(
                       'Update Profile',
