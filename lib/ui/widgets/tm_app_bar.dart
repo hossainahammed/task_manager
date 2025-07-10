@@ -63,12 +63,21 @@ class _TaskManagerAppBarState extends State<TaskManagerAppBar> {
 void _onTapLogoutButton(){
  Navigator.pushNamedAndRemoveUntil(context, SignInScreen.name, (predicate)=>false);
 }
-void _onTapProfileBar(){
-    if(ModalRoute.of(context)!.settings.name == UpdateProfileScreen.name){
-      return;
+
+  void _onTapProfileBar(){
+    if(ModalRoute.of(context)!.settings.name != UpdateProfileScreen.name){
+      Navigator.pushNamed(context, UpdateProfileScreen.name);
     }
 
-    Navigator.pushNamed(context, UpdateProfileScreen.name);
-}
+
+  }
+                // OR (We can also do it by this )
+// void _onTapProfileBar(){
+//     if(ModalRoute.of(context)!.settings.name == UpdateProfileScreen.name){
+//       return;
+//     }
+//
+//     Navigator.pushNamed(context, UpdateProfileScreen.name);
+// }
 
 }
