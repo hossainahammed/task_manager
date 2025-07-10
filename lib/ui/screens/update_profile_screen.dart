@@ -109,32 +109,10 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   ),
                   SizedBox(height: 16),
                   ElevatedButton(
-                    onPressed:_onTapSignUpButton,
+                    onPressed:_onTapSubmitButton,
                     child: Icon(Icons.arrow_circle_right_outlined),
                   ),
-                  SizedBox(height: 32),
-                  Center(
-                    child: RichText(
-                      text: TextSpan(
-                        text: " Have an account ?",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: 0.4,
-                        ),
-                        children: [
-                          TextSpan(
-                            text: 'Sign In',
-                            style: TextStyle(
-                              color: Colors.green,
-                              fontWeight: FontWeight.w700,
-                            ),
-                            recognizer:
-                            TapGestureRecognizer()..onTap = _onTapSignInButton,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+
                 ],
               ),
             ),
@@ -144,15 +122,12 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
     );
   }
 
-  void _onTapSignUpButton() {
+  void _onTapSubmitButton() {
     if(_formkey.currentState!.validate()){
-      //TODO:Sign in with Api
+      //TODO:Update profile with Api
     }
   }
 
-  void _onTapSignInButton() {
-    Navigator.pop(context);
-  }
 
   void dispose(){
     _emailTEController.dispose();
