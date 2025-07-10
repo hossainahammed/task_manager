@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_manager/app.dart';
 import 'package:task_manager/ui/screens/sign_in_screen.dart';
 import 'package:task_manager/ui/screens/update_profile_screen.dart';
 
@@ -63,6 +64,10 @@ void _onTapLogoutButton(){
  Navigator.pushNamedAndRemoveUntil(context, SignInScreen.name, (predicate)=>false);
 }
 void _onTapProfileBar(){
+    if(ModalRoute.of(context)!.settings.name == UpdateProfileScreen.name){
+      return;
+    }
+
     Navigator.pushNamed(context, UpdateProfileScreen.name);
 }
 
