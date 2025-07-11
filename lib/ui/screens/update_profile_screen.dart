@@ -152,7 +152,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           ),
                         ),
                         const SizedBox(width:8 ,),
-                        Text('Select Image'),
+                        Text(_selectedImage == null ? 'Select Image':_selectedImage!.name,maxLines: 1,style: TextStyle(
+                          overflow: TextOverflow.ellipsis,
+                        ),),
                       ],
                     ),
                   ),
