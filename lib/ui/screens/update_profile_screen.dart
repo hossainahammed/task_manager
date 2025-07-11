@@ -33,7 +33,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
               autovalidateMode: AutovalidateMode.onUserInteraction,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+                children: <Widget>[
                   SizedBox(height:80),
                   Center(
                     child: Text(
@@ -42,6 +42,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                     ),
                   ),
                   SizedBox(height: 25),
+                  _buildPhotoPicker(),
+
 
                   SizedBox(height: 8),
                   TextFormField(
@@ -120,6 +122,40 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
         ),
       ),
     );
+  }
+
+  Widget _buildPhotoPicker() {
+    return GestureDetector(
+      onTap: _onTapPhotoPicker,
+      child: Container(
+                    height: 50,
+                    width: double.maxFinite,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: Colors.white,
+                    ),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 100,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            color: Colors.grey,
+                            borderRadius: BorderRadius.only(topLeft:Radius.circular(8),
+                              bottomLeft: Radius.circular(8),),
+                          ),
+                          alignment: Alignment.center,
+                          child: Text('photo',style:TextStyle(color: Colors.white, fontWeight:FontWeight.w700),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+    );
+  }
+  void _onTapPhotoPicker(){
+
+
   }
 
   void _onTapSubmitButton() {
