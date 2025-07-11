@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:task_manager/ui/widgets/screen_bagground.dart';
 import 'package:task_manager/ui/widgets/tm_app_bar.dart';
 import '../utils/asset_paths.dart';
@@ -20,6 +21,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   final TextEditingController _phoneTEController = TextEditingController();
   final TextEditingController _passwordTEController = TextEditingController();
   final GlobalKey<FormState> _formkey =GlobalKey<FormState>();
+  final ImagePicker _imagePicker = ImagePicker();
+  XFile? _selectedImage;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -148,13 +151,22 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           child: Text('photo',style:TextStyle(color: Colors.white, fontWeight:FontWeight.w700),
                           ),
                         ),
+                        const SizedBox(width:8 ,),
+                        Text('Select Image'),
                       ],
                     ),
                   ),
     );
   }
-  void _onTapPhotoPicker(){
+  Future<void> _onTapPhotoPicker()async {
+    final XFile? pickedImage = await _imagePicker.pickImage(source: ImageSource.gallery);
 
+  if(pickedImage != null){
+    _selectedImage = pickedImage;
+    setState(() {
+
+    });
+  }
 
   }
 
