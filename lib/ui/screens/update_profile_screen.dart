@@ -179,6 +179,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   }
 
 
+  @override
   void dispose(){
     _emailTEController.dispose();
     _firstNameTEController.dispose();
