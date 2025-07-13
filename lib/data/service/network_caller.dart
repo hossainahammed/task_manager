@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:http/http.dart';
 
 class NetworkResponse {
@@ -15,14 +16,26 @@ class NetworkResponse {
 }
 
 class NetworkCaller {
-  static Future<Response> getRequest({required String url}) async {
+  static const String _defaultErrorMessage = 'Something went wrong';
+
+  static Future<NetworkResponse> getRequest({required String url}) async {
     Uri uri = Uri.parse(url);
     Response response = await get(uri);
+
     if (response.statusCode == 200) {
-      // Handle success
+      final decodedJson = jsonDecode(response.body);
+      return NetworkResponse(
+        isSuccess: true,
+        statusCode: response.statusCode,
+        body: decodedJson,
+      );
     } else {
-      // Handle error
+      final decodedJson = jsonDecode(response.body); // Decode the error response
+      return NetworkResponse(
+        isSuccess: false,
+        statusCode: response.statusCode,
+        errorMessage: decodedJson['data'] ?? _defaultErrorMessage,
+      );
     }
-    return response; // Make sure to return the response
   }
 }
