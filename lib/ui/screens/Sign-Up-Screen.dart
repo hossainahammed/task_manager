@@ -6,6 +6,7 @@ import 'package:task_manager/ui/widgets/screen_bagground.dart';
 import 'package:task_manager/ui/widgets/snackbar_message.dart';
 import '../../data/urls.dart';
 import '../utils/asset_paths.dart';
+import '../widgets/centered_circular_progress_indicator.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -110,7 +111,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   SizedBox(height: 16),
                   Visibility(
                     visible: _signUpInProgress == false,
-                    replacement: Center(child: CircularProgressIndicator()),
+                    replacement: CenteredCircularProgressIndicator(),
                     child: ElevatedButton(
                       onPressed: _onTapSignUpButton,
                       child: Icon(Icons.arrow_circle_right_outlined),
