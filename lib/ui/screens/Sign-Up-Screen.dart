@@ -159,7 +159,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _signUpInProgress = true;
     setState(() {});
     Map<String, String> requestBody = {
-      "emai": _emailTEController.text.trim(),
+      "email": _emailTEController.text.trim(),
       "firstName": _firstNameTEController.text.trim(),
       "lastName": _lastNameTEController.text.trim(),
       "mobile": _phoneTEController.text.trim(),
