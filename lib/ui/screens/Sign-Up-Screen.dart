@@ -152,7 +152,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   void _onTapSignUpButton() {
     if (_formkey.currentState!.validate()) {
-      _signUp;
+      _signUp();
     }
   }
 
