@@ -1,8 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:task_manager/data/models/user_model.dart';
 import 'package:task_manager/data/service/network_caller.dart';
 import 'package:task_manager/data/urls.dart';
+import 'package:task_manager/ui/controllers/auth_controller.dart';
 import 'package:task_manager/ui/screens/forgot_passaword_email_screen.dart';
 import 'package:task_manager/ui/screens/main_nav_bar_holder_screen.dart';
 import 'package:task_manager/ui/widgets/screen_bagground.dart ';
@@ -135,24 +137,29 @@ class _SignInScreenState extends State<SignInScreen> {
   Future<void> _signIn() async {
     _signInProgress = true;
     setState(() {});
-    Map<String,String> requestBody={
-
-        "email":_emailTEController.text.trim(),
-        "password":_passwordTEController.text,
-
+    Map<String, String> requestBody = {
+      "email": _emailTEController.text.trim(),
+      "password": _passwordTEController.text,
     };
     NetworkResponse response = await NetworkCaller.postRequest(
-      url: Urls.loginUrl,body: requestBody,
-
+      url: Urls.loginUrl,
+      body: requestBody,
     );
-    if(response.isSuccess)
-    {
-        Navigator.pushNamedAndRemoveUntil(
-          context,MainNavBarHolderScreen.name,(predicate) => false);
-    }else{
-          _signInProgress = false;
-          setState(() {});
-          showSnackBarMessage(context, response.errorMessage!);
+    if (response.isSuccess) {
+      UserModel userModel = UserModel.fromJson(response.body!['data']);
+      String token = response.body!['token'];
+
+      await AuthController.saveUserData(userModel, token);
+
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        MainNavBarHolderScreen.name,
+        (predicate) => false,
+      );
+    } else {
+      _signInProgress = false;
+      setState(() {});
+      showSnackBarMessage(context, response.errorMessage!);
     }
   }
 

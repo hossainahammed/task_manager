@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:task_manager/app.dart';
+
+import 'package:task_manager/ui/controllers/auth_controller.dart';
 import 'package:task_manager/ui/screens/sign_in_screen.dart';
 import 'package:task_manager/ui/screens/update_profile_screen.dart';
 
@@ -35,7 +36,7 @@ class _TaskManagerAppBarState extends State<TaskManagerAppBar> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Hossain Ahammed',
+                   AuthController.userModel!.fullName ,
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
@@ -43,7 +44,7 @@ class _TaskManagerAppBarState extends State<TaskManagerAppBar> {
                     ),
                   ),
                   Text(
-                    'hossain627@gmail.com',
+                    AuthController.userModel!.email,
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
@@ -60,7 +61,8 @@ class _TaskManagerAppBarState extends State<TaskManagerAppBar> {
     );
   }
 
-void _onTapLogoutButton(){
+Future<void> _onTapLogoutButton() async{
+   await AuthController.clearData();
  Navigator.pushNamedAndRemoveUntil(context, SignInScreen.name, (predicate)=>false);
 }
 
