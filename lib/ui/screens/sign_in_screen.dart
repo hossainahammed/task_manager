@@ -1,6 +1,5 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:task_manager/data/models/user_model.dart';
 import 'package:task_manager/data/service/network_caller.dart';
 import 'package:task_manager/data/urls.dart';
@@ -9,7 +8,6 @@ import 'package:task_manager/ui/screens/forgot_passaword_email_screen.dart';
 import 'package:task_manager/ui/screens/main_nav_bar_holder_screen.dart';
 import 'package:task_manager/ui/widgets/screen_bagground.dart ';
 import 'package:task_manager/ui/widgets/snackbar_message.dart';
-import '../utils/asset_paths.dart';
 import '../widgets/centered_circular_progress_indicator.dart';
 import 'Sign-Up-Screen.dart';
 
@@ -144,6 +142,7 @@ class _SignInScreenState extends State<SignInScreen> {
     NetworkResponse response = await NetworkCaller.postRequest(
       url: Urls.loginUrl,
       body: requestBody,
+      isFromLogin: true,
     );
     if (response.isSuccess) {
       UserModel userModel = UserModel.fromJson(response.body!['data']);
