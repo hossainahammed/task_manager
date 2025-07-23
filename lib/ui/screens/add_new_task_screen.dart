@@ -16,7 +16,7 @@ class AddNewTaskScreen extends StatefulWidget {
 
 class _AddNewTaskScreenState extends State<AddNewTaskScreen> {
   final TextEditingController _titleTEController=TextEditingController();
-  final TextEditingController _desriptionTEController=TextEditingController();
+  final TextEditingController _descriptionTEController=TextEditingController();
    final GlobalKey<FormState>_formkey = GlobalKey<FormState>();
    bool _addNewTaskInProgress= false;
 
@@ -54,7 +54,7 @@ class _AddNewTaskScreenState extends State<AddNewTaskScreen> {
                 ),
                 const SizedBox(height: 8),
                 TextFormField(
-                  controller: _desriptionTEController,
+                  controller: _descriptionTEController,
                   validator: (String? value){
                     if(value?.trim().isEmpty??true)
                     {
@@ -72,7 +72,7 @@ class _AddNewTaskScreenState extends State<AddNewTaskScreen> {
                   visible: _addNewTaskInProgress ==  false,
                   replacement: CircularProgressIndicator(),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: _onTapSubmitbutoon,
                     child: Icon(Icons.arrow_circle_right_outlined),
                   ),
                 ),
@@ -94,16 +94,17 @@ class _AddNewTaskScreenState extends State<AddNewTaskScreen> {
     setState(() {});
     Map<String, String> requestBody={
        "title":_titleTEController.text.trim(),
-      "description":_desriptionTEController.text.trim(),
+      "description":_descriptionTEController.text.trim(),
       "status":"New",
     };
-    NetworkResponse response = await NetworkCaller.postRequest(url: Urls.createNewTaskUrl);
+    NetworkResponse response = await NetworkCaller.postRequest(url: Urls.createNewTaskUrl, body: requestBody);
+
     _addNewTaskInProgress = false;
     setState(() {
     });
     if(response.isSuccess){
       _titleTEController.clear();
-      _desriptionTEController.clear();
+      _descriptionTEController.clear();
       showSnackBarMessage(context, 'Added new task');
     }
     else{
@@ -115,7 +116,7 @@ class _AddNewTaskScreenState extends State<AddNewTaskScreen> {
  @override
   void dispose() {
    _titleTEController.dispose();
-   _desriptionTEController.dispose();
+   _descriptionTEController.dispose();
     super.dispose();
   }
 }
