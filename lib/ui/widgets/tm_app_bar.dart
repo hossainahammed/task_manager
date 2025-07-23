@@ -20,6 +20,7 @@ class TaskManagerAppBar extends StatefulWidget implements PreferredSizeWidget {
 class _TaskManagerAppBarState extends State<TaskManagerAppBar> {
   @override
   Widget build(BuildContext context) {
+    // print(AuthController.userModel!.fullName);
     return AppBar(
       backgroundColor: Colors.green,
       title: GestureDetector(
