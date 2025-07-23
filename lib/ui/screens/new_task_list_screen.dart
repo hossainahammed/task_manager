@@ -125,12 +125,14 @@ class _NewTaskListScreenState extends State<NewTaskListScreen> {
       }
       _taskStatusCountList = list;
     } else {
+       // showSnackBarMessage(context, response.errorMessage!);
       if (mounted) {
         showSnackBarMessage(context, response.errorMessage!);
       }
     }
 
     _getTaskStatusCountInProgress = false;
+    // setState(() {});
     if (mounted) {
       setState(() {});
     }
