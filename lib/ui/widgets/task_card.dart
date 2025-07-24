@@ -8,7 +8,6 @@ import 'centered_circular_progress_indicator.dart';
 
 enum TaskType { tNew, Progress, Completed, Cancelled }
 
-
 class TaskCard extends StatefulWidget {
   const TaskCard({
     super.key,
@@ -27,6 +26,7 @@ class TaskCard extends StatefulWidget {
 
 class _TaskCardState extends State<TaskCard> {
   bool _updateTaskStatusInProgress = false;
+  bool _deleteInProgress = false; // Track delete operation
 
   @override
   Widget build(BuildContext context) {
@@ -62,22 +62,61 @@ class _TaskCardState extends State<TaskCard> {
                     side: BorderSide.none,
                   ),
                 ),
-                Spacer(),
-                IconButton(onPressed: () {}, icon: Icon(Icons.delete)),
+                const Spacer(),
+                _buildDeleteButton(), // Delete button
                 Visibility(
-                  visible: _updateTaskStatusInProgress == false,
-                  replacement: CenteredCircularProgressIndicator(),
+                  visible: !_updateTaskStatusInProgress,
+                  replacement: const CenteredCircularProgressIndicator(),
                   child: IconButton(
                     onPressed: () {
                       _showEditTaskStatusDialog();
                     },
-                    icon: Icon(Icons.edit),
+                    icon: const Icon(Icons.edit),
                   ),
                 ),
               ],
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildDeleteButton() {
+    return _deleteInProgress
+        ? const Padding(
+      padding: EdgeInsets.all(8.0),
+      child: SizedBox(
+        width: 24,
+        height: 24,
+        child: CircularProgressIndicator(strokeWidth: 2),
+      ),
+    )
+        : IconButton(
+      icon: const Icon(Icons.delete, color: Colors.red),
+      onPressed: () => _showDeleteConfirmationDialog(),
+    );
+  }
+
+  void _showDeleteConfirmationDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Confirm Delete'),
+        content: const Text('Are you sure you want to delete this task?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              _deleteTask(); // Call delete task method
+            },
+            child: const Text('Delete'),
+          ),
+        ],
       ),
     );
   }
@@ -113,49 +152,29 @@ class _TaskCardState extends State<TaskCard> {
       context: context,
       builder: (ctx) {
         return AlertDialog(
-          title: Text('Change Status'),
+          title: const Text('Change Status'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               ListTile(
-                title: Text('New'),
+                title: const Text('New'),
                 trailing: _getTaskStatusTrailing(TaskType.tNew),
-                onTap: () {
-                  if (widget.taskType == TaskType.tNew) {
-                    return;
-                  }
-                  _updateTaskStatus('New');
-                },
+                onTap: () => _onTapTaskStatus(TaskType.tNew),
               ),
               ListTile(
-                title: Text('In Progress'),
+                title: const Text('In Progress'),
                 trailing: _getTaskStatusTrailing(TaskType.Progress),
-                onTap: () {
-                  if (widget.taskType == TaskType.Progress) {
-                    return;
-                  }
-                  _updateTaskStatus('Progress');
-                },
+                onTap: () => _onTapTaskStatus(TaskType.Progress),
               ),
               ListTile(
-                title: Text('Completed'),
+                title: const Text('Completed'),
                 trailing: _getTaskStatusTrailing(TaskType.Completed),
-                onTap: () {
-                  if (widget.taskType == TaskType.Completed) {
-                    return;
-                  }
-                  _updateTaskStatus('Completed');
-                },
+                onTap: () => _onTapTaskStatus(TaskType.Completed),
               ),
               ListTile(
-                title: Text('Cancelled'),
+                title: const Text('Cancelled'),
                 trailing: _getTaskStatusTrailing(TaskType.Cancelled),
-                onTap: () {
-                  if (widget.taskType == TaskType.Cancelled) {
-                    return;
-                  }
-                  _updateTaskStatus('Cancelled');
-                },
+                onTap: () => _onTapTaskStatus(TaskType.Cancelled),
               ),
             ],
           ),
@@ -165,16 +184,36 @@ class _TaskCardState extends State<TaskCard> {
   }
 
   Widget? _getTaskStatusTrailing(TaskType type) {
-    return widget.taskType == type ? Icon(Icons.check) : null;
+    return widget.taskType == type ? const Icon(Icons.check) : null;
   }
 
-  // TODO: Complete this
-  // void _onTapTaskStatus(TaskType type) {
-  //   if (type == widget.taskType) {
-  //     return;
-  //   }
-  //
-  // }
+  void _onTapTaskStatus(TaskType type) {
+    if (type == widget.taskType) {
+      return; // No change needed if the status is the same
+    }
+    _updateTaskStatus(type.toString().split('.').last); // Convert enum to string
+  }
+
+  Future<void> _deleteTask() async {
+    _deleteInProgress = true; // Set delete in progress
+    if (mounted) setState(() {});
+
+    try {
+      final response = await NetworkCaller.getRequest(
+        url: Urls.deleteTaskUrl(widget.taskModel.id),
+      );
+
+      if (response.isSuccess) {
+        widget.onStatusUpdate(); // Refresh the parent list
+        showSnackBarMessage(context, 'Task deleted successfully');
+      } else {
+        showSnackBarMessage(context, response.errorMessage ?? 'Delete failed');
+      }
+    } finally {
+      _deleteInProgress = false; // Reset delete in progress
+      if (mounted) setState(() {});
+    }
+  }
 
   Future<void> _updateTaskStatus(String status) async {
     Navigator.pop(context);

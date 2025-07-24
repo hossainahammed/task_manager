@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:task_manager/ui/widgets/task_card.dart';
-
 import '../../data/models/task_model.dart';
 import '../../data/service/network_caller.dart';
 import '../../data/urls.dart';
 import '../widgets/centered_circular_progress_indicator.dart';
-import '../widgets/snackbar_message.dart';
+import 'package:task_manager/ui/widgets/snackbar_message.dart';
 
 class ProgressTaskListScreen extends StatefulWidget {
   const ProgressTaskListScreen({super.key});
