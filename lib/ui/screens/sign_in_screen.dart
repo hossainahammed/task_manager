@@ -1,5 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:task_manager/data/models/user_model.dart';
 import 'package:task_manager/data/service/network_caller.dart';
 import 'package:task_manager/data/urls.dart';
@@ -150,11 +152,18 @@ class _SignInScreenState extends State<SignInScreen> {
 
       await AuthController.saveUserData(userModel, token);
 
-      Navigator.pushNamedAndRemoveUntil(
-        context,
-        MainNavBarHolderScreen.name,
-        (predicate) => false,
-      );
+      // Navigator.pushNamedAndRemoveUntil(
+      //   context,
+      //   MainNavBarHolderScreen.name,
+      //   (predicate) => false,
+      // );
+      //--------------------------------- OR -------------------------
+      // Get.to(() => const MainNavBarHolderScreen());
+      //--------------------------------- OR -------------------------
+      // Get.toNamed(MainNavBarHolderScreen.name);
+      // If we want to it remove all previous screen then sign in .then we need to use   Get.offAllNamed(MainNavBarHolderScreen.name);
+      Get.offAllNamed(MainNavBarHolderScreen.name);
+      
     } else {
       _signInProgress = false;
       setState(() {});
