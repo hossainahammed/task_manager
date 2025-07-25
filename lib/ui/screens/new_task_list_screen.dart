@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:task_manager/ui/screens/add_new_task_screen.dart';
 import 'package:task_manager/ui/widgets/task_card.dart';
 import 'package:task_manager/ui/widgets/task_count_summary_card.dart';
@@ -139,6 +141,16 @@ class _NewTaskListScreenState extends State<NewTaskListScreen> {
   }
 
   void _onTapAddNewTaskButton() {
-    Navigator.pushNamed(context, AddNewTaskScreen.name);
+    // Navigator.pushNamed(context, AddNewTaskScreen.name);
+    // -----------------------------OR--------------------
+    // Navigator.push(context, MaterialPageRoute(builder: (context)=>AddNewTaskScreen()));
+
+    // -------------------------------------- Or BY USING GETX Normal mode ------------------
+
+    // Get.to(()=>AddNewTaskScreen());
+
+   // ----------------------OR  If we want to Use Named version then ------------
+    Get.toNamed(AddNewTaskScreen.name);
+    // if we want to pop screen then in getx it is Get.back();
   }
 }
