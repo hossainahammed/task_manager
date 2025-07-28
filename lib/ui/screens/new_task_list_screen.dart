@@ -142,6 +142,7 @@ class _NewTaskListScreenState extends State<NewTaskListScreen> {
 
   void _onTapAddNewTaskButton() {
     // Navigator.pushNamed(context, AddNewTaskScreen.name);
+    
     // -----------------------------OR--------------------
     // Navigator.push(context, MaterialPageRoute(builder: (context)=>AddNewTaskScreen()));
 
